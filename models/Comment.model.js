@@ -6,6 +6,6 @@ const commentSchema = mongoose.Schema({
   newsId: [{ type: mongoose.Schema.Types.ObjectId, ref: "news" }],
 });
 
-const comment = mongoose.model("comment", commentSchema);
+const Comment = mongoose.model("comment", commentSchema);
 
-module.exports = comment;
+module.exports = Comment;
