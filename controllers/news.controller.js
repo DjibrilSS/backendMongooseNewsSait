@@ -1,20 +1,33 @@
+const News = require("../models/news.model");
+
 module.exports.newsControllers = {
-  getNews: (req, res) => {
-    res.json("ok");
+  getNews: async (req, res) => {
+    const news = await News.find();
+    res.json(news);
   },
-  getByIdNews: (req, res) => {
-    res.json("okID");
+  getByIdNews: async (req, res) => {
+    const news = await News.findById(req.params.id);
+    res.json(news);
   },
-  getByCatNews: (req, res) => {
-    res.json("okCAT");
+  getByCatNews: async (req, res) => {
+    const news = await News.findOne({ catId: req.params.id });
+    res.json(news);
   },
   addNews: (req, res) => {
-    res.json("ok");
+    News.create({
+      title: req.body.title,
+      text: req.body.text,
+      catId: req.params.id,
+    }).then(() => {
+      res.json("новость добавлена");
+    });
   },
-  deleteNews: (req, res) => {
-    res.json("ok");
+  deleteNews: async (req, res) => {
+    await News.findByIdAndDelete(req.params.id);
+    res.json("новость удалена");
   },
-  patchNews: (req, res) => {
-    res.json("ok");
+  patchNews: async (req, res) => {
+    await News.findByIdAndUpdate(req.params.id, req.body);
+    res.json("новость обновлена");
   },
 };

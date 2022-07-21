@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const newsSchema = mongoose.Schema({
-  title: string,
-  text: string,
+  title: String,
+  text: String,
   catId: [{ type: mongoose.Schema.Types.ObjectId, ref: "category" }],
 });
 
-const Category = mongoose.model("category", newsSchema);
+const News = mongoose.model("news", newsSchema);
 
-module.exports = Category;
+module.exports = News;
