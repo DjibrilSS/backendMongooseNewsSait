@@ -1,11 +1,20 @@
+const Comment = require("../models/Comment.model");
+
 module.exports.commentsControllers = {
-  getComments: (req, res) => {
-    res.json("okCom");
+  getComments: async (req, res) => {
+    const comment = await Comment.find({ newsId: req.params.id });
+    res.json(comment);
   },
-  addComment: (req, res) => {
-    res.json("ok");
+  addComment: async (req, res) => {
+    await Comment.create({
+      name: req.body.name,
+      text: req.body.text,
+      newsId: req.params.id,
+    });
+    res.json("комментарий добавлен");
   },
-  deleteComment: (req, res) => {
-    res.json("ok");
+  deleteComment: async (req, res) => {
+    await Comment.findByIdAndDelete(req.params.id);
+    res.json("комментарий удален");
   },
 };

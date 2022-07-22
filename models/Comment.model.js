@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const commentSchema = mongoose.Schema({
-  name: string,
-  text: string,
+  name: String,
+  text: String,
   newsId: [{ type: mongoose.Schema.Types.ObjectId, ref: "news" }],
 });
 
